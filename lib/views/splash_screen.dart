@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:foodie/views/form_screen.dart';
 
-import '../Widgets/bottom_navigation_bar.dart';
 import '../utils/app_colors.dart';
 import '../utils/text_style.dart';
 
@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(seconds: 3), () {
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => const CustomNavBar()),
+          MaterialPageRoute(builder: (context) => const FormScreen()),
           (route) => false);
     });
   }
