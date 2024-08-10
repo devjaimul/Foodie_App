@@ -11,7 +11,8 @@ class SingUpScreen extends StatefulWidget {
 
 class _SingUpScreenState extends State<SingUpScreen> {
   final _key = GlobalKey<FormState>();
-  bool _obscureText = true;
+  bool _obscureTextPassword = true;
+  bool _obscureTextConformPassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,7 @@ class _SingUpScreenState extends State<SingUpScreen> {
                   )
                 ],
               ),
-              const SizedBox(height: 50,),
+              const SizedBox(height: 25,),
               TextFormField(
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
@@ -113,16 +114,16 @@ class _SingUpScreenState extends State<SingUpScreen> {
 
               TextFormField(
                 controller: passwordController,
-                obscureText: _obscureText,
+                obscureText: _obscureTextPassword,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                     label: const Text("Password"),
                     prefixIcon: const Icon(Icons.lock),
                     suffixIcon: IconButton(
-                      icon: Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
+                      icon: Icon(_obscureTextPassword ? Icons.visibility_off : Icons.visibility),
                       onPressed: () {
                         setState(() {
-                          _obscureText = !_obscureText;
+                          _obscureTextPassword = !_obscureTextPassword;
                         });
                       },
                     ),
@@ -154,19 +155,21 @@ class _SingUpScreenState extends State<SingUpScreen> {
                   return null;
                 },
               ),
+
               const SizedBox(height: 10,),
+
               TextFormField(
                 controller: conformPasswordController,
-                obscureText: _obscureText,
+                obscureText: _obscureTextConformPassword,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                     label: const Text("Conform Password"),
                     prefixIcon: const Icon(Icons.lock),
                     suffixIcon: IconButton(
-                      icon: Icon(_obscureText ? Icons.visibility_off : Icons.visibility),
+                      icon: Icon(_obscureTextConformPassword ? Icons.visibility_off : Icons.visibility),
                       onPressed: () {
                         setState(() {
-                          _obscureText = !_obscureText;
+                          _obscureTextConformPassword = !_obscureTextConformPassword;
                         });
                       },
                     ),
@@ -194,10 +197,13 @@ class _SingUpScreenState extends State<SingUpScreen> {
                     return "Conform your password";
                   } else if (value.length < 8) {
                     return "password invalid";
+                  } else if (value != passwordController.text) {
+                    return "Passwords do not match";
                   }
                   return null;
                 },
               ),
+
               const SizedBox(height: 20,),
 
               ElevatedButton(
